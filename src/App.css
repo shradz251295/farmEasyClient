@@ -62,7 +62,7 @@
      */
     
     .user-type-option-login-span {
-        color: #3b3b3b;
+        color: orange;
         font-size: 12px;
         font-weight: bold;
     }
@@ -103,6 +103,7 @@
         font-size: 16px;
         font-weight: bold;
         margin: 8%;
+        color: #fff;
     }
     
     .user-type-option {
@@ -113,8 +114,12 @@
         align-items: center;
         width: 20%;
         flex-direction: column;
-        background: #e7e7e7 !important;
+        background: currentColor !important;
         padding: 0 15px;
+    }
+    
+    .user-type-option p {
+        color: ghostwhite
     }
     
     .farmer_page_background {
@@ -307,6 +312,7 @@
     
     label {
         font-size: 14px;
+        text-transform: capitalize
     }
     
     .singup-btn {

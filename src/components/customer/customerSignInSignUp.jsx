@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import padlock from "../../assets/padlock.png";
 import form from "../../assets/form.png";
 import Appbar from "../appbar";
-import farmerBanner from "../../assets/farmer-banner.jpg";
+import consumerBanner from "../../assets/consumer.jpg";
 import { withRouter } from "react-router";
-import Login from "../../pages/farmer/Login";
+import Login from "../../pages/customer/loginCustomer";
 
-class FarmerSignInUp extends Component {
+class CustomerSignInUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ class FarmerSignInUp extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
   handleRegisteration = () => {
-    this.props.history.push("/farmer-register");
+    this.props.history.push("/customer-register");
   };
   handleLogin = () => {
     this.setState({ showLoginForm: true });
@@ -27,12 +27,12 @@ class FarmerSignInUp extends Component {
       <div>
         <Appbar />
         <div className="farmer-portal-login">
-          <img src={farmerBanner} className="login-banner" />
+          <img src={consumerBanner} className="login-banner" />
           <div
             className="farmer-login-register-tabs"
             style={{ color: "orange" }}
           >
-            <h1>Farmer Login/Register</h1>
+            <h1>Customer Login/Register</h1>
           </div>
           <Divider style={{ margin: "0.5% 0" }} />
           <div
@@ -40,15 +40,15 @@ class FarmerSignInUp extends Component {
             style={{ display: "flex", flexDirection: "row" }}
           >
             <div className="farmer_login_quote">
-              <h1>FARMER</h1>
+              <h1>CUSTOMER</h1>
               <h1>LOGIN/REGISTER</h1>
               <div className="quote_border">
                 <div></div>
               </div>
               <div className="farmer_quote">
                 <p>
-                  Online platform links farmer to buyers to buy and sell your
-                  agriculture products online.
+                  Why to visit Super Store and Pay High? Order all products and
+                  get deliver at your doorstep.
                 </p>
               </div>
             </div>
@@ -57,7 +57,7 @@ class FarmerSignInUp extends Component {
                 <Login />
               ) : (
                 <div style={{ justifyContent: "center" }}>
-                  <h2>Existing Farmer</h2>
+                  <h2>Existing Customer</h2>
                   <img src={padlock} width="20%" />
                   <Button
                     onClick={this.handleLogin}
@@ -102,4 +102,4 @@ class FarmerSignInUp extends Component {
   }
 }
 
-export default withRouter(FarmerSignInUp);
+export default withRouter(CustomerSignInUp);

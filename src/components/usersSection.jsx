@@ -4,7 +4,7 @@ import customer from '../assets/users.svg';
 import supplier from '../assets/supplier.svg';
 import admin from '../assets/admin.svg';
 import { Button, Card } from '@material-ui/core';
-import Login from '../pages/Login';
+import Login from '../pages/farmer/Login';
 
 class UserSection extends Component {
     constructor(props) {
@@ -16,7 +16,11 @@ class UserSection extends Component {
     }
     handleUserTypeSelection = (value) => {
         this.setState({  selectedUser: value, showLoginForm: true, })
-        window.location.href="/farmer-login"
+        if(value==="Customer"){
+            window.location.href="/customer-login"
+        }else{
+            window.location.href="/farmer-login"
+        }
     }
 
     render() {
@@ -30,26 +34,27 @@ class UserSection extends Component {
                     <Button className="login-btn">Click here</Button>
                 </Card>
                 <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Admin')}>
-                    <h4>Admin</h4>
+                    <h4 className="user-title">Admin</h4>
                     <img src={admin} />
                     <p>Administer the categories for the products and all website information's.</p>
                     <span className="user-type-option-login-span">Login/Register as Admin</span>
                     <Button className="login-btn">Click here</Button>
                 </Card>
-                <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Supplier')}>
-                    <h4>Supplier</h4>
-                    <img src={supplier} />
-                    <p>Are you willing to purchase products from farmer's?</p>
-                    <span className="user-type-option-login-span">Login/Register as Supplier</span>
-                    <Button className="login-btn">Click here</Button>
-                </Card>
-                <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Customer')}>
-                    <h4>Customer</h4>
+                  <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Customer')}>
+                    <h4 className="user-title">Customer</h4>
                     <img src={customer} />
                     <p>Are you willing to purchase products from farmer's?</p>
                     <span className="user-type-option-login-span">Login/Register as Customer</span>
                     <Button className="login-btn">Click here</Button>
                 </Card>
+                <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Supplier')}>
+                    <h4 className="user-title">Crop Prediction</h4>
+                    <img src={supplier} />
+                    <p>Prediction for crops,weather etc.</p>
+                    {/* <span className="user-type-option-login-span">Login/Register as Supplier</span> */}
+                    <Button className="login-btn">Click here</Button>
+                </Card>
+              
 
                 {/* <Login 
                 showLoginForm={this.state.showLoginForm}

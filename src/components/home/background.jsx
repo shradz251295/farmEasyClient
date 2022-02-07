@@ -23,7 +23,7 @@ class Carousels extends Component {
         </div>
         <Description />
         <OurService />
-        <Analysis/>
+        {/* <Analysis/> */}
       </div>
        
     );

@@ -10,8 +10,6 @@ import React, { Component } from "react";
 import Appbar from "../appbar";
 import FarmerProfile from "./profile";
 import SideMenu from "./sideMenu";
-import SellProduce from "./sellProduct";
-import ViewProducts from  "./viewProducts"
 
 const theme = createMuiTheme({
   overrides: {
@@ -56,11 +54,7 @@ class FarmerLandingPage extends Component {
       showUserTypePopup: false,
       selectedUser: "",
       showLoginForm: false,
-      selectedMenu:""
     };
-  }
-  toggleSideMenu=(value)=>{
-    this.setState({selectedMenu:value})
   }
   render() {
     return (
@@ -70,15 +64,8 @@ class FarmerLandingPage extends Component {
             {/* <div className="home_page_background"></div> */}
             <Appbar />
             <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex'}}>
-              <SideMenu toggleSideMenu={this.toggleSideMenu}/>
-              {this.state.selectedMenu==="produce"?
-              <SellProduce/>
-              :
-              this.state.selectedMenu==="view_produce"?
-              <ViewProducts/>
-              :
+              <SideMenu />
               <FarmerProfile />
-    }
             </div>
           </div>
         </div>
