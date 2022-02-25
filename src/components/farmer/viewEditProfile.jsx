@@ -53,7 +53,9 @@ class ViewEditProfile extends Component {
               Edit Photo
             </span>
           </div>
+          <div>
           <Divider />
+          </div>
           <div style={{ width: "60%" }}>
             <h5>Personal Details</h5>
             <div>

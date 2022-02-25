@@ -9,7 +9,7 @@ import {
   MuiThemeProvider,
   TextField,
 } from "@material-ui/core";
-import Register from "./Register";
+import { login } from "../../services/adminService";
 
 const theme = createMuiTheme({
   overrides: {
@@ -32,7 +32,8 @@ const theme = createMuiTheme({
     },
     MuiSnackbarContent:{
       message:{
-        background:"none !important",      
+        background:"none !important", 
+        width:"100% important"     
       },
       root:{
         width:'auto !important',
@@ -47,14 +48,13 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      showRegisterationPage: false,
       open:false,
       variant:"error",
       msg:""
     };
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
-    this.createAccount = this.createAccount.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleUsername(event) {
@@ -65,11 +65,7 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   }
 
-  createAccount() {
-    this.setState({ showRegisterationPage: true });
-  }
-
-  handleLogin = () => {
+  handleLogin = async() => {
     if (!this.state.username) {
       this.setState({
         open: true,
@@ -83,7 +79,32 @@ class Login extends Component {
         msg: "Please enter password",
       });
     } else {
-      this.props.history.push("/farmer");
+      let data={
+        username:this.state.username,
+        password:this.state.password
+      }
+     login(data)
+      .then((res)=>{
+        console.log(res);
+        if(res.status===true){
+      this.props.history.push("/admin");
+      localStorage.setItem('username',res.data.username)
+        }
+        else if(res.status===false){
+          this.setState({
+            open: true,
+            variant: "error",
+            msg: "Invalid email id or password",
+          });
+        }
+        else{
+          this.setState({
+            open: true,
+            variant: "error",
+            msg: "Something went wrong.",
+          });
+        }
+      })
     }
   };
 
@@ -94,8 +115,8 @@ class Login extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="farmer-form-options" style={{ padding: "0 20px 20px" }}>
-          <form className="farmer-login-form">
+        <div className="farmer-form-options" style={{ padding: "0 20px 20px",width:"500px" }}>
+          <form className="farmer-login-form" >
             <h3>Login Panel</h3>
             <div
               className="signup-form-fields"

@@ -65,9 +65,7 @@ class Appbar extends Component {
                                 <MenuItem>
                                     <span className="menu_list">Home</span>
                                 </MenuItem>
-                                <MenuItem>
-                                    <span className="menu_list">About Us</span>
-                                </MenuItem>
+                                
                                 <MenuItem>
                                     <span className="menu_list">Farming Training</span>
                                 </MenuItem>

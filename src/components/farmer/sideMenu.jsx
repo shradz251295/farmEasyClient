@@ -10,6 +10,7 @@ class SideMenu extends Component {
       selectProduce: false,
       selectFarmersKit: false,
       selectViewProduce:false,
+      selectFarmersMarket:false,
       showContent: false,
     };
   }
@@ -21,6 +22,7 @@ class SideMenu extends Component {
         selectProduce: false,
         selectViewProduce: false,
         selectFarmersKit: false,
+        selectFarmersMarket:false,
       });
     } else if (option === "produce") {
       await this.setState({
@@ -28,6 +30,7 @@ class SideMenu extends Component {
         selectProduce: true,
         selectViewProduce:false,
         selectFarmersKit: false,
+        selectFarmersMarket:false,
       });
     }else if (option === "view_produce") {
       await this.setState({
@@ -35,6 +38,7 @@ class SideMenu extends Component {
         selectProduce:false,
         selectViewProduce: true,
         selectFarmersKit: false,
+        selectFarmersMarket:false,
       });
     } else if (option === "farmers_kit") {
       await this.setState({
@@ -42,6 +46,15 @@ class SideMenu extends Component {
         selectProduce: false,
         selectViewProduce: false,
         selectFarmersKit: true,
+        selectFarmersMarket:false,
+      });
+    }else if (option === "farmers_market") {
+      await this.setState({
+        selectDashboard: false,
+        selectProduce: false,
+        selectViewProduce: false,
+        selectFarmersKit: false,
+        selectFarmersMarket:true,
       });
     }
     this.props.toggleSideMenu(option)
@@ -53,7 +66,7 @@ class SideMenu extends Component {
         <MenuItem
           style={{
             width: "100%",
-            background: "linear-gradient(to right,green 0%, #5ca904 100%)",
+            background: "linear-gradient(to right,#006400 0%, #009000 40%,green 60%)",
             color: "#fff",
             height: "100px",
           }}
@@ -75,8 +88,8 @@ class SideMenu extends Component {
         <MenuItem
           style={{
             width: "100%",
-            background: this.state.selectDashboard ? "green" : "#fff",
-            color: this.state.selectDashboard ? "#fff" : "green",
+            background: this.state.selectDashboard ? "#fff" : "none",
+            color: this.state.selectDashboard ? "inherit" : "#fff",
           }}
           onClick={() => this.handleSelection("dashboard")}
         >
@@ -85,8 +98,8 @@ class SideMenu extends Component {
         <MenuItem
           style={{
             width: "100%",
-            background: this.state.selectProduce ? "green" : "#fff",
-            color: this.state.selectProduce ? "#fff" : "green",
+            background: this.state.selectProduce ? "#fff" : "inherit",
+            color: this.state.selectProduce ? "inherit" : "#fff",
           }}
           onClick={() => this.handleSelection("produce")}
         >
@@ -94,8 +107,8 @@ class SideMenu extends Component {
         </MenuItem>
         <MenuItem  style={{
             width: "100%",
-            background: this.state.selectViewProduce ? "green" : "#fff",
-            color: this.state.selectViewProduce ? "#fff" : "green",
+            background: this.state.selectViewProduce ? "#fff" : "inherit",
+            color: this.state.selectViewProduce ? "inherit" : "#fff",
           }}
           onClick={() => this.handleSelection("view_produce")}
           >
@@ -104,15 +117,25 @@ class SideMenu extends Component {
         <MenuItem
           style={{
             width: "100%",
-            background: this.state.selectFarmersKit ? "green" : "#fff",
-            color: this.state.selectFarmersKit ? "#fff" : "green",
+            background: this.state.selectFarmersKit ? "#fff" : "inherit",
+            color: this.state.selectFarmersKit ? "inherit" : "#fff",
           }}
           onClick={() => this.handleSelection("farmers_kit")}
         >
           Farmer's Kit
         </MenuItem>
-        <MenuItem style={{ width: "100%" }}>Hire Details</MenuItem>
-        <MenuItem style={{ width: "100%" }}>Logout</MenuItem>
+        <MenuItem
+          style={{
+            width: "100%",
+            background: this.state.selectFarmersMarket ? "#fff" : "inherit",
+            color: this.state.selectFarmersMarket ? "inherit" : "#fff",
+          }}
+          onClick={() => this.handleSelection("farmers_market")}
+        >
+          Farmer's Market
+        </MenuItem>
+        <MenuItem style={{ width: "100%",color:"#fff" }}>Hire Details</MenuItem>
+        <MenuItem style={{ width: "100%",color:"#fff" }}>Logout</MenuItem>
       </Drawer>
     );
   }

@@ -7,6 +7,9 @@ import Register from "./pages/farmer/Register";
 import FarmerLandingPage from "./components/farmer/farmerLandingPage";
 import CustomerSignInSignUp from "./components/customer/customerSignInSignUp";
 import RegisterCustomer from "./pages/customer/registerCustomer";
+import AdminLogin from "./components/admin/adminLogin";
+import AdminLandingPage from "./components/admin/adminLandingPage";
+
 
 class App extends Component {
   render() {
@@ -15,6 +18,9 @@ class App extends Component {
         <Router>
           {/* <Routes> */}
             <Route path="/" exact strict component={Home} />
+            <Route path="/admin-login" component={AdminLogin} />
+            <Route path="/admin" component={AdminLandingPage} />
+
             <Route path="/farmer-login" component={FarmerSignInUp} />
             <Route path="/farmer-register" component={Register} />
             <Route path="/farmer" component={FarmerLandingPage} />

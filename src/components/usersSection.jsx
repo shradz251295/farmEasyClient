@@ -18,6 +18,8 @@ class UserSection extends Component {
         this.setState({  selectedUser: value, showLoginForm: true, })
         if(value==="Customer"){
             window.location.href="/customer-login"
+        }else if(value==="Admin"){
+            window.location.href="/admin-login"
         }else{
             window.location.href="/farmer-login"
         }

@@ -8,13 +8,10 @@ import {
 import React, { Component } from "react";
 
 import Appbar from "../appbar";
-import FarmerProfile from "./profile";
-import SideMenu from "./sideMenu";
-import SellProduce from "./sellProduct";
-import ViewProducts from  "./viewProducts"
-import FarmerKit from "./farmersKit";
-import FarmerMarket from "./farmersMarket";
-
+import AdminDashboard from "./adminDashboard";
+import AddState from "./addState";
+import AdminSideMenu from "./adminSideMenu";
+import AddCity from "./addCity";
 
 const theme = createMuiTheme({
   overrides: {
@@ -41,7 +38,8 @@ const theme = createMuiTheme({
         background: "#006400",
       },
       paperAnchorDockedLeft: {
-        borderColor: "#006400",
+        border: "none !important",
+        padding:"28px 12px !important"
       },
     },
     MuiTypography: {
@@ -52,14 +50,11 @@ const theme = createMuiTheme({
     },
   },
 });
-class FarmerLandingPage extends Component {
+class AdminLandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showUserTypePopup: false,
-      selectedUser: "",
-      showLoginForm: false,
-      selectedMenu:""
+      selectedMenu:"dashboard"
     };
   }
   toggleSideMenu=(value)=>{
@@ -73,21 +68,17 @@ class FarmerLandingPage extends Component {
             {/* <div className="home_page_background"></div> */}
             <Appbar />
             <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex'}}>
-              <SideMenu toggleSideMenu={this.toggleSideMenu}/>
-              {this.state.selectedMenu==="produce"?
-              <SellProduce/>
+              <AdminSideMenu toggleSideMenu={this.toggleSideMenu}/>
+              {this.state.selectedMenu==="dashboard"?
+              <AdminDashboard />
               :
-              this.state.selectedMenu==="view_produce"?
-              <ViewProducts/>
+              this.state.selectedMenu==="addState"?
+              <AddState />
               :
-              this.state.selectedMenu==="farmers_kit"?
-              <FarmerKit/>
+              this.state.selectedMenu==="addCity"?
+              <AddCity />
               :
-              this.state.selectedMenu==="farmers_market"?
-              <FarmerMarket />
-              :
-              <FarmerProfile />
-    }
+              null}
             </div>
           </div>
         </div>
@@ -95,4 +86,4 @@ class FarmerLandingPage extends Component {
     );
   }
 }
-export default FarmerLandingPage;
+export default AdminLandingPage;
