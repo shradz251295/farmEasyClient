@@ -43,7 +43,7 @@ class FarmerMarket extends Component {
     return (
         <MuiThemeProvider theme={theme}>
       <div style={{ display: "flex", width: "100%", flexDirection: "column" }}>
-        <Tabs value={this.state.selectedTab} aria-label="wrapped label tabs example" style={{margin:"0px",padding:"10px 10px 0",background:"#fff"}}>
+        <Tabs value={this.state.selectedTab} aria-label="wrapped label tabs example" style={{margin:"0px 38px",padding:"10px 10px 0",background:"#fff"}}>
           <Tab 
           value={"select_fruit"}
           label="Fruits" 

@@ -41,7 +41,8 @@ const theme = createMuiTheme({
         background: "#006400",
       },
       paperAnchorDockedLeft: {
-        borderColor: "#006400",
+        border: "none !important",
+        padding:"28px 12px !important"
       },
     },
     MuiTypography: {
@@ -72,7 +73,7 @@ class FarmerLandingPage extends Component {
           <div className="home-page-content">
             {/* <div className="home_page_background"></div> */}
             <Appbar />
-            <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex'}}>
+            <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex',overflow:"hidden"}}>
               <SideMenu toggleSideMenu={this.toggleSideMenu}/>
               {this.state.selectedMenu==="produce"?
               <SellProduce/>

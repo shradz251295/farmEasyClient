@@ -178,9 +178,15 @@ class Register extends Component {
     } else {
       let data = {
         name: this.state.name,
-        emailId: this.state.username,
+        username: this.state.username,
         password: this.state.password,
         address: this.state.address,
+        country: this.state.country,
+        state: this.state.state,
+        city: this.state.city,
+        pincode: this.state.pincode,
+        mobileNo1: this.state.mobileNo1,
+        mobileNo2: this.state.mobileNo2,
       };
       createAccount(data).then((res) => {
         console.log(res.data);
@@ -190,7 +196,12 @@ class Register extends Component {
           msg: "Registered Successfully!",
         });
         setTimeout(() => {
-          this.props.history.push("/farmer-login");
+          this.props.history.push({
+            state: {
+              showLogin:true
+            },
+            pathname: "/farmer-login"
+          });
         }, 2000);
       });
     }

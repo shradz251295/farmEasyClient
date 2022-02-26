@@ -3,9 +3,15 @@ import axios from 'axios';
 export function createAccount(data) {
     return axios.post('/farmer/createAccount', {
         name: data.name,
-        emailId: data.emailId,
+        emailId: data.username,
         password: data.password,
-        address: data.address
+        address: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        pincode: data.pincode,
+        mobile_number: data.mobileNo1,
+        alternative_mobile_number: data.mobileNo2,
     })
 
 }
