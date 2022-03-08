@@ -108,3 +108,15 @@ export function getProductList() {
         });
 
 }
+
+export async function displayRazorPay(amount,options) {
+    axios.post('http://localhost:3001/placeOrder', { amount: amount })
+    .then(res => {
+        options.order_id = res.data.id;
+        options.amount = res.data.amount;
+        console.log(options)
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
+    })
+    .catch(e => console.log(e))
+}

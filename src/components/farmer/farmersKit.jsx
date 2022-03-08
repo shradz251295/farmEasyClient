@@ -1,6 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, createMuiTheme, MuiThemeProvider, Tab, Tabs, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import ferti from '../../assets/New folder/methi.jpg'
+import { getProductList } from "../../services/farmerService";
 import ChangePassword from "./changePassword";
 import ReviewProduct from "./reviewProduct";
 import ViewEditProfile from "./viewEditProfile";
@@ -32,8 +33,19 @@ class FarmerKit extends Component {
     super(props);
     this.state = {
       selectedTab: "select_fertilizer",
-      showProductDetails:false
+      showProductDetails:false,
+      productList:[]
     }
+  }
+
+  componentDidMount(){
+    getProductList()
+    .then((res)=>{
+      if(res.status===true){
+        // this.setState({productList:res.data.length})
+        console.log(res)
+      }
+    })
   }
 
   handleTabSelection = (value) => {
