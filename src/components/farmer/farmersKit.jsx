@@ -31,7 +31,8 @@ class FarmerKit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "select_fertilizer"
+      selectedTab: "select_fertilizer",
+      showProductDetails:false
     }
   }
 
@@ -39,11 +40,16 @@ class FarmerKit extends Component {
     this.setState({ selectedTab: value })
   }
 
+  reviewProduct=()=>{
+    this.setState({showProductDetails:true})
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        {/* <ReviewProduct /> */}
-        
+        {this.state.showProductDetails===true?
+       <ReviewProduct />
+ :       
         <div style={{ display: "flex", width: "100%", flexDirection: "column" }}>
           <Tabs value={this.state.selectedTab} aria-label="wrapped label tabs example" style={{ margin: "0px 0px 0px 38px", padding: "10px 10px 0", background: "#fff" }}>
             <Tab
@@ -96,7 +102,7 @@ class FarmerKit extends Component {
                 </span>
               </CardContent>
               <CardActions style={{ justifyContent: "center" }}>
-                <Button size="small" style={{ background: "yellowgreen", color: "#fff" }}>Learn More</Button>
+                <Button size="small" style={{ background: "yellowgreen", color: "#fff" }} onClick={this.reviewProduct}>Learn More</Button>
               </CardActions>
             </Card>
             <Card className="items-list">
@@ -155,6 +161,7 @@ class FarmerKit extends Component {
             </Card>
           </div>
         </div>
+  }
       </MuiThemeProvider>
     );
   }

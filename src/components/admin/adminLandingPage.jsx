@@ -12,6 +12,9 @@ import AdminDashboard from "./adminDashboard";
 import AddState from "./addState";
 import AdminSideMenu from "./adminSideMenu";
 import AddCity from "./addCity";
+import AddProduceCategory from "./addProduceCategory";
+import AddProduceType from "./addProduceType";
+import AddFarmerKit from "./addFarmerKit";
 
 const theme = createMuiTheme({
   overrides: {
@@ -77,6 +80,15 @@ class AdminLandingPage extends Component {
               :
               this.state.selectedMenu==="addCity"?
               <AddCity />
+              :
+              this.state.selectedMenu==="addCategory"?
+              <AddProduceCategory />
+              :
+              this.state.selectedMenu==="addType"?
+              <AddProduceType />
+              :
+              this.state.selectedMenu==="addFarmerKit"?
+              <AddFarmerKit/>
               :
               null}
             </div>

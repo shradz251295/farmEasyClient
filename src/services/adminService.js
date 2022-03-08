@@ -42,3 +42,18 @@ export function addState(data) {
             return res;
         });
 }
+
+export function addFarmerKit(data) {
+    console.log(data)
+    return axios.post('/admin/addFarmerKit', data)
+        .then(response => {
+            console.log(response)
+            let res = response.data
+            return res;
+        })
+        .catch(error => {
+            console.log(error.response)
+            let res = error.response.data
+            return res;
+        });
+}

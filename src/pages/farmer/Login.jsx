@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import Register from "./Register";
+import { login } from "../../services/farmerService";
 
 const theme = createMuiTheme({
   overrides: {
@@ -83,7 +84,33 @@ class Login extends Component {
         msg: "Please enter password",
       });
     } else {
-      this.props.history.push("/farmer");
+      let data={
+        username:this.state.username,
+        password:this.state.password
+      }
+      login(data)
+      .then((res)=>{
+        console.log(res);
+        if(res.status===true){
+      this.props.history.push("/famer");
+      localStorage.setItem('farmer_data',JSON.stringify(res.data))
+        }
+        else if(res.status===false){
+          this.setState({
+            open: true,
+            variant: "error",
+            msg: "Invalid email id or password",
+          });
+        }
+        else{
+          this.setState({
+            open: true,
+            variant: "error",
+            msg: "Something went wrong.",
+          });
+        }
+      })
+
     }
   };
 

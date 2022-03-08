@@ -24,6 +24,7 @@ const theme = createMuiTheme({
       root: {
         background: "ghostwhite !important",
       },
+      
     },
     MuiTab: {
       root: {

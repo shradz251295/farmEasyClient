@@ -15,9 +15,12 @@ class ReviewProduct extends Component {
                     padding: "20px 80px",
                     display:'flex',
                     alignItems:'center',
-                    width:"100%"
+                    width:"100%",
+                    flexDirection:"column"
                 }}
             >
+                  <h5>Review Product Details</h5>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-around",width:"100%"}}>
                 <div>
                     <img src={ferti} />
                 </div>
@@ -33,6 +36,7 @@ class ReviewProduct extends Component {
                         <Button style={{width:"100%",background:"royalblue",color:"#fff"}}>Buy Now</Button>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }

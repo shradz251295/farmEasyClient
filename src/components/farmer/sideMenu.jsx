@@ -93,7 +93,7 @@ class SideMenu extends Component {
             >
               <Avatar style={{ width: "28px", height: "28px" }} />
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <span style={{ marginLeft: "15%" }}>Shraddha</span>
+                <span style={{ marginLeft: "15%",textTransform:"capitalize"}}>{JSON.parse(localStorage.getItem('farmer_data')).name}</span>
               </div>
             </div>
           </MenuItem>

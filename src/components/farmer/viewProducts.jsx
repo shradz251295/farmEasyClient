@@ -1,6 +1,7 @@
 import {  TableBody,TableCell, Table, TableContainer, TableHead, TableRow ,Paper,styled, TablePagination} from '@material-ui/core';
 import {tableCellClasses}  from '@material-ui/core';
 import React,{Component} from 'react';
+import { getProductList } from '../../services/farmerService';
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -26,6 +27,19 @@ const rows = [
 
 ];
 class ViewProducts extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      productArr:[]
+    }
+  }
+  componentDidMount(){
+    getProductList()
+    .then((res)=>{
+      console.log(res.data);
+      this.setState({productArr:res.data})
+    })
+  }
     render(){
         return(
             // <MuiThemeProvider theme={theme}>
@@ -57,7 +71,7 @@ class ViewProducts extends Component{
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {this.state.productArr.map((row) => (
             <StyledTableRow
               key={row.category}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -65,12 +79,12 @@ class ViewProducts extends Component{
               <TableCell  scope="row">
                 {row.category}
               </TableCell>
-              <TableCell align="left">{row.product}</TableCell>
+              <TableCell align="left">{row.name}</TableCell>
               <TableCell align="left">{row.quantity}</TableCell>
-              <TableCell align="left">{row.image}</TableCell>
+              <TableCell align="left"></TableCell>
               <TableCell align="left">{row.status}</TableCell>
               <TableCell align="left">{row.description}</TableCell>
-              <TableCell align="left">{row.action}</TableCell>
+              <TableCell align="left"></TableCell>
 
             </StyledTableRow>
           ))}
