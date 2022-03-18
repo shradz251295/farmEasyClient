@@ -14,6 +14,7 @@ import SellProduce from "./sellProduct";
 import ViewProducts from  "./viewProducts"
 import FarmerKit from "./farmersKit";
 import FarmerMarket from "./farmersMarket";
+import ViewFarmerKit from "./viewFarmerKit";
 
 
 const theme = createMuiTheme({
@@ -60,11 +61,15 @@ class FarmerLandingPage extends Component {
       showUserTypePopup: false,
       selectedUser: "",
       showLoginForm: false,
-      selectedMenu:""
+      selectedMenu:"",
+      productToEdit:""
     };
   }
   toggleSideMenu=(value)=>{
     this.setState({selectedMenu:value})
+  }
+  editProduce=(value)=>{
+    this.setState({selectedMenu:"produce",productToEdit:value})
   }
   render() {
     return (
@@ -76,16 +81,19 @@ class FarmerLandingPage extends Component {
             <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex',overflow:"hidden"}}>
               <SideMenu toggleSideMenu={this.toggleSideMenu}/>
               {this.state.selectedMenu==="produce"?
-              <SellProduce/>
+              <SellProduce productToEdit={this.state.productToEdit}/>
               :
               this.state.selectedMenu==="view_produce"?
-              <ViewProducts/>
+              <ViewProducts editProduce={this.editProduce} />
               :
               this.state.selectedMenu==="farmers_kit"?
               <FarmerKit/>
               :
               this.state.selectedMenu==="farmers_market"?
               <FarmerMarket />
+              :
+              this.state.selectedMenu==="view_order"?
+              <ViewFarmerKit/>
               :
               <FarmerProfile />
     }

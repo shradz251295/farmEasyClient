@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import farmerBanner from "../../assets/consumer.jpg";
 import Appbar from "../../components/appbar";
-import { createAccount } from "../../services/farmerService";
+import { createAccount } from "../../services/customerService";
 import { withRouter } from "react-router";
 
 class RegisterCustomer extends Component {
@@ -89,7 +89,7 @@ class RegisterCustomer extends Component {
       this.setState({
         open: true,
         variant: "error",
-        msg: "Farmer's name cannot be empty",
+        msg: "Customer's name cannot be empty",
       });
     } else if (!/^[A-Za-z]+$/.test(this.state.name)) {
       this.setState({
@@ -178,9 +178,15 @@ class RegisterCustomer extends Component {
     } else {
       let data = {
         name: this.state.name,
-        emailId: this.state.username,
+        username: this.state.username,
         password: this.state.password,
         address: this.state.address,
+        country: this.state.country,
+        state: this.state.state,
+        city: this.state.city,
+        pincode: this.state.pincode,
+        mobileNo1: this.state.mobileNo1,
+        mobileNo2: this.state.mobileNo2,
       };
       createAccount(data).then((res) => {
         console.log(res.data);
@@ -189,9 +195,15 @@ class RegisterCustomer extends Component {
           variant: "success",
           msg: "Registered Successfully!",
         });
-        setTimeout(() => {
-          this.props.history.push("/farmer-login");
-        }, 2000);
+        this.props.history.push(
+          {
+            state: {
+              showLogin: true,
+            },
+            pathname: "/customer-login",
+          },
+          2000
+        );
       });
     }
   }
@@ -225,7 +237,7 @@ class RegisterCustomer extends Component {
               </div>
               <div className="farmer_quote">
                 <p>
-                Why to visit Super Store and Pay High? Order all products and
+                  Why to visit Super Store and Pay High? Order all products and
                   get deliver at your doorstep.
                 </p>
               </div>
@@ -238,7 +250,7 @@ class RegisterCustomer extends Component {
                   <div className="fields-per-row">
                     <div style={{ width: "49%" }}>
                       <label>
-                        Farmer Name <span style={{ color: "red" }}>*</span>
+                        Customer Name <span style={{ color: "red" }}>*</span>
                       </label>
                       <TextField
                         className="form-fields"
@@ -269,6 +281,7 @@ class RegisterCustomer extends Component {
                         Password <span style={{ color: "red" }}>*</span>
                       </label>
                       <TextField
+                        type="password"
                         className="form-fields"
                         value={this.state.password}
                         onChange={this.handlePassword}
@@ -282,6 +295,7 @@ class RegisterCustomer extends Component {
                         Confirm Password <span style={{ color: "red" }}>*</span>
                       </label>
                       <TextField
+                        type="password"
                         className="form-fields"
                         value={this.state.confirmPassword}
                         onChange={this.handleConfirmPassword}
@@ -410,7 +424,7 @@ class RegisterCustomer extends Component {
           }}
           open={this.state.open}
           onClose={this.handleClose}
-          autoHideDuration={5000}
+          autoHideDuration={4000}
         >
           <SnackbarContent
             style={{

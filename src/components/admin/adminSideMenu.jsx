@@ -13,6 +13,7 @@ class AdminSideMenu extends Component {
       selectCategory :false,
       selectType: false,
       selectFarmerKit:false,
+      viewFarmerList:false,
       showContent: false,
     };
   }
@@ -26,6 +27,7 @@ class AdminSideMenu extends Component {
         selectCatgory: false,
         selectType: false,
         selectFarmerKit:false,
+        viewFarmerList:false,
       });
     } else if (option === "addState") {
       await this.setState({
@@ -35,6 +37,7 @@ class AdminSideMenu extends Component {
         selectCatgory: false,
         selectType: false,
         selectFarmerKit:false,
+        viewFarmerList:false,
       });
     } else if (option === "addCity") {
       await this.setState({
@@ -44,6 +47,7 @@ class AdminSideMenu extends Component {
         selectCatgory: false,
         selectType: false,
         selectFarmerKit:false,
+        viewFarmerList:false,
       });
     } else if (option === "addCategory") {
       await this.setState({
@@ -53,6 +57,7 @@ class AdminSideMenu extends Component {
         selectCatgory: true,
         selectType: false,
         selectFarmerKit:false,
+        viewFarmerList:false,
       });
     } else if (option === "addType") {
       await this.setState({
@@ -61,7 +66,8 @@ class AdminSideMenu extends Component {
         selectCity: false,
         selectCatgory: false,
         selectType: true,
-        selectFarmerKit:false
+        selectFarmerKit:false,
+        viewFarmerList:false,
       });
     }
       else if (option === "addFarmerKit") {
@@ -71,11 +77,28 @@ class AdminSideMenu extends Component {
           selectCity: false,
           selectCatgory: false,
           selectType: false,
-          selectFarmerKit:true
+          selectFarmerKit:true,
+          viewFarmerList:false,
         });
+    }
+    else if (option === "viewFarmerData") {
+      await this.setState({
+        selectDashboard: false,
+        selectState: false,
+        selectCity: false,
+        selectCatgory: false,
+        selectType: false,
+        selectFarmerKit:false,
+        viewFarmerList:true,
+      });
     }
     this.props.toggleSideMenu(option);
   };
+
+  handleSignOut=()=>{
+    localStorage.removeItem('admin_data');
+    window.location.href="/"
+  }
 
   render() {
     return (
@@ -84,7 +107,7 @@ class AdminSideMenu extends Component {
           <span
             style={{ color: "#f1f1f1", fontSize: "15px", textAlign: "left" }}
           >
-            ADMIN PANEL
+           MY ACCOUNT
           </span>
           <MenuItem
             style={{
@@ -156,6 +179,22 @@ class AdminSideMenu extends Component {
               color: "#fff",
               paddingLeft: "45px",
               textTransform: "capitalize",
+              borderBottom: "1px solid #f1f1f1",
+              marginBottom: "4%",
+            }}
+            onClick={()=>this.handleSelection("viewFarmerData")}
+          >
+           View Farmers
+          </MenuItem>
+          {/* <MenuItem
+            style={{
+              width: "100%",
+              height: "40px",
+              // background:
+              //   "linear-gradient(to right,#006400 0%, #009000 40%,green 60%)",
+              color: "#fff",
+              paddingLeft: "45px",
+              textTransform: "capitalize",
               // borderBottom: "2px solid #f1f1f1",
             }}
             onClick={()=>this.handleSelection("addCategory")}
@@ -177,7 +216,7 @@ class AdminSideMenu extends Component {
             onClick={()=>this.handleSelection("addType")}
           >
             Produce Types
-          </MenuItem>
+          </MenuItem> */}
         </div>
         <div style={{ textAlign: "left" }}>
           <span
@@ -194,12 +233,29 @@ class AdminSideMenu extends Component {
               color: "#fff",
               paddingLeft: "45px",
               textTransform: "capitalize",
-              // borderBottom: "2px solid #f1f1f1",
+              borderBottom: "1px solid #f1f1f1",
+              marginBottom: "4%",
             }}
             onClick={()=>this.handleSelection("addFarmerKit")}
           >
             Add/View Farmer's Kit
           </MenuItem>
+        </div>
+        <div style={{ textAlign: "left" }}>
+        <MenuItem
+          style={{
+            width: "100%",
+            height: "40px",
+            // background:
+            //   "linear-gradient(to right,#006400 0%, #009000 40%,green 60%)",
+            color: "#fff",
+            paddingLeft: "45px",
+            textTransform: "capitalize",
+          }}
+          onClick={() => this.handleSignOut()}
+        >
+         Logout
+        </MenuItem>
         </div>
       </Drawer>
     );

@@ -11,7 +11,8 @@ class CustomerSignInUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLoginForm: false,
+      showLoginForm:  this.props.location.state !== undefined &&
+      this.props.location.state.showLogin === true ? true : false,
     };
     this.handleRegisteration = this.handleRegisteration.bind(this);
     this.handleLogin = this.handleLogin.bind(this);

@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import Register from "./registerCustomer";
+import { login } from "../../services/customerService";
 
 const theme = createMuiTheme({
   overrides: {
@@ -25,19 +26,19 @@ const theme = createMuiTheme({
         background: "#f9f9f9",
       },
     },
-    MuiSnackbar:{
-      root:{
-        background:"none !important",
-      }
-    },
-    MuiSnackbarContent:{
-      message:{
-        background:"none !important",      
+    MuiSnackbar: {
+      root: {
+        background: "none !important",
       },
-      root:{
-        width:'auto !important',
-      }
-    }
+    },
+    MuiSnackbarContent: {
+      message: {
+        background: "none !important",
+      },
+      root: {
+        width: "auto !important",
+      },
+    },
   },
 });
 
@@ -48,9 +49,9 @@ class CustomerLogin extends Component {
       username: "",
       password: "",
       showRegisterationPage: false,
-      open:false,
-      variant:"error",
-      msg:""
+      open: false,
+      variant: "error",
+      msg: "",
     };
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -83,7 +84,30 @@ class CustomerLogin extends Component {
         msg: "Please enter password",
       });
     } else {
-      this.props.history.push("/farmer");
+      let data = {
+        username: this.state.username,
+        password: this.state.password,
+      };
+      login(data).then((res) => {
+        if (res.status === true) {
+          localStorage.setItem("customer_data", JSON.stringify(res.data));
+          setTimeout(() => {
+            this.props.history.push("/customer");
+          }, 1000);
+        } else if (res.status === false) {
+          this.setState({
+            open: true,
+            variant: "error",
+            msg: "Invalid email id or password",
+          });
+        } else {
+          this.setState({
+            open: true,
+            variant: "error",
+            msg: "Something went wrong.",
+          });
+        }
+      });
     }
   };
 
@@ -142,6 +166,7 @@ class CustomerLogin extends Component {
                     Password <span style={{ color: "red" }}>*</span>
                   </label>
                   <TextField
+                    type="password"
                     className="form-fields"
                     style={{
                       margin: "0",
@@ -155,7 +180,9 @@ class CustomerLogin extends Component {
                     }}
                   />
                 </div>
-                <Button className="singup-btn" onClick={this.handleLogin}>Login</Button>
+                <Button className="singup-btn" onClick={this.handleLogin}>
+                  Login
+                </Button>
               </div>
             </div>
           </form>
@@ -165,11 +192,11 @@ class CustomerLogin extends Component {
               horizontal: "center",
             }}
             style={{
-              background:'none !important'
+              background: "none !important",
             }}
             open={this.state.open}
             onClose={this.handleClose}
-            autoHideDuration={50000}
+            autoHideDuration={4000}
           >
             <SnackbarContent
               style={{
@@ -180,8 +207,6 @@ class CustomerLogin extends Component {
           </Snackbar>
         </div>
       </MuiThemeProvider>
-          
-        
     );
   }
 }

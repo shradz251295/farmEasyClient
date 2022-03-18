@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export function createAccount(data) {
-    return axios.post('/farmer/createAccount', {
+    return axios.post('/customer/createAccount', {
         name: data.name,
         emailId: data.username,
         password: data.password,
@@ -19,7 +19,7 @@ export function createAccount(data) {
 export function editProfile(data) {
     console.log(data);
 
-    return axios.post('/farmer/editProfile', {
+    return axios.post('/customer/editProfile', {
         name: data.name,
         emailId: data.username,
         address: data.address,
@@ -34,7 +34,7 @@ export function editProfile(data) {
 }
 
 export function changePassword(data) {
-    return axios.post('/farmer/changePassword', data)
+    return axios.post('/customer/changePassword', data)
         .then(response => {
             console.log(response)
             let res = response.data
@@ -50,7 +50,7 @@ export function changePassword(data) {
 
 
 export function login(data) {
-    return axios.post('/farmer/login', data)
+    return axios.post('/customer/login', data)
         .then(response => {
             console.log(response)
             let res = response.data
@@ -63,9 +63,8 @@ export function login(data) {
         });
 }
 
-export function addProductDetails(data) {
-    console.log(data)
-    return axios.post('/farmer/sellProduct', data)
+export function getProductList(data) {
+    return axios.get('/customer/getProductList')
         .then(response => {
             console.log(response)
             let res = response.data
@@ -77,55 +76,8 @@ export function addProductDetails(data) {
             return res;
         });
 }
-
-export function getFarmerList() {
-    return axios.get('/farmer/getFarmerList')
-        .then(response => {
-            console.log(response)
-            let res = response.data
-            return res;
-        })
-        .catch(error => {
-            console.log(error.response)
-            let res = error.response.data
-            return res;
-        });
-
-}
-
-
-export function getProductList() {
-    return axios.get('/farmer/getProductList')
-        .then(response => {
-            console.log(response)
-            let res = response.data
-            return res;
-        })
-        .catch(error => {
-            console.log(error.response)
-            let res = error.response.data
-            return res;
-        });
-
-}
-
-export function getFarmerKitList() {
-    return axios.get('/farmer/getFarmerKit')
-        .then(response => {
-            console.log(response)
-            let res = response.data
-            return res;
-        })
-        .catch(error => {
-            console.log(error.response)
-            let res = error.response.data
-            return res;
-        });
-
-}
-
-export function deleteProduce(data) {
-    return axios.post('/farmer/deleteProduce', data)
+export function getCustomerList(data) {
+    return axios.get('/customer/getCustomerList')
         .then(response => {
             console.log(response)
             let res = response.data
@@ -137,22 +89,8 @@ export function deleteProduce(data) {
             return res;
         });
 }
-export function getFarmerKit(data) {
-    return axios.get('/admin/getProductList')
-        .then(response => {
-            console.log(response)
-            let res = response.data
-            return res;
-        })
-        .catch(error => {
-            console.log(error.response)
-            let res = error.response.data
-            return res;
-        });
-}
-
 export async function displayRazorPay(amount, options) {
-    axios.post('http://localhost:3001/placeOrder', { amount: amount, })
+    axios.post('http://localhost:3001/custplaceOrder', { amount: amount, })
         .then(res => {
             options.order_id = res.data.id;
             options.amount = res.data.amount;

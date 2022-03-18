@@ -11,6 +11,7 @@ import {
 import React, { Component } from "react";
 import { addState } from "../../services/adminService";
 import stateData from './data.json';
+import ViewStateDetails from "./viewStateDetails";
 
 const theme = createMuiTheme({
   overrides: {
@@ -45,6 +46,7 @@ class AddState extends Component {
     super(props);
     this.state={
       state:stateData.state_arr,
+      selectedTab:"select_profile",
       selectedState:"",
       description:"",
       status:"active",
@@ -53,6 +55,10 @@ class AddState extends Component {
       msg:""
     }
   }
+  handleTabSelection=(value)=>{
+    this.setState({selectedTab:value})
+}
+
   handleState=async(evt)=>{
    await this.setState({selectedState:evt.target.value})
   }
@@ -63,6 +69,18 @@ class AddState extends Component {
    handleDescription=async(evt)=>{
     await this.setState({description:evt.target.value})
    }
+
+   
+  editData=(key)=>{
+    console.log(key);
+    this.setState({
+     selectedTab:"select_profile",
+      selectedState:key.state,
+      description:key.statedescription,
+      status:key.status,
+    })
+  }
+
 
   submitState=()=>{
     if (this.state.selectedState==="") {
@@ -79,9 +97,11 @@ class AddState extends Component {
       });
     } else {
       let data={
-        username:localStorage.getItem('username'),
+        username:JSON.parse(localStorage.getItem("admin_data")).username,
         state:this.state.selectedState,
-        description:this.state.description,
+        statedescription:this.state.description,
+        city:"",
+        citydescription:"",
         status:this.state.status
       }
      addState(data)
@@ -92,6 +112,9 @@ class AddState extends Component {
             open: true,
             variant: "success",
             msg: "State added successfully !",
+            selectedState:"",
+            description:"",
+            status:"active",
           });
         }
         else if(res.status===false){
@@ -119,7 +142,7 @@ class AddState extends Component {
           style={{ display: "flex", width: "100%", flexDirection: "column" }}
         >
           <Tabs
-            value={"select_profile"}
+            value={this.state.selectedTab}
             aria-label="wrapped label tabs example"
             style={{ margin: "20px 50px 0 50px" }}
           >
@@ -129,9 +152,9 @@ class AddState extends Component {
               onClick={() => this.handleTabSelection("select_profile")}
             />
             <Tab
-              value={"change_pswd"}
+              value={"view_details"}
               label="View State details"
-              onClick={() => this.handleTabSelection("change_pswd")}
+              onClick={() => this.handleTabSelection("view_details")}
             />
           </Tabs>
           <div
@@ -145,6 +168,7 @@ class AddState extends Component {
               padding: "20px 80px",
             }}
           >
+            {this.state.selectedTab==="select_profile"?
             <div style={{ width: "100%" }}>
               <h5>Enter State Details</h5>
               <div>
@@ -211,6 +235,9 @@ class AddState extends Component {
 
               <Button className="singup-btn" onClick={this.submitState}>Submit</Button>
             </div>
+            :
+            <ViewStateDetails editData={this.editData}/>
+                    }
           </div>
           <Snackbar
             anchorOrigin={{
@@ -222,7 +249,7 @@ class AddState extends Component {
             }}
             open={this.state.open}
             onClose={this.handleClose}
-            autoHideDuration={50000}
+            autoHideDuration={4000}
           >
             <SnackbarContent
               style={{

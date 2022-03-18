@@ -35,6 +35,11 @@ const theme = createMuiTheme({
             },
 
         },
+        MuiPaper:{
+            elevation4:{
+                boxShadow:"1px 5px 10px 0 #000 !important"
+            }
+        },
         MuiToolbar: {
             regular: {
                 display: "flex",
@@ -42,6 +47,12 @@ const theme = createMuiTheme({
                 // width: "100%"
             }
         },
+        MuiMenuItem:{
+            root:{
+                fontWeight:"bold",
+                fontSize:"16px"
+            }
+        }
        
 
     },
@@ -52,6 +63,17 @@ const theme = createMuiTheme({
 
 
 class Appbar extends Component {
+    handleUserTypeSelection = (value) => {
+        if(value==="Home"){
+            window.location.href="/"
+        }else if(value==="Customer"){
+            window.location.href="/customer-login"
+        }else if(value==="Admin"){
+            window.location.href="/admin-login"
+        }else{
+            window.location.href="/farmer-login"
+        }
+    }
     render() {
         return (
             <MuiThemeProvider theme={theme}>
@@ -62,12 +84,18 @@ class Appbar extends Component {
                                 <img src={logo} alt="appbar menu logo" />
                             </div>
                             <div className="appbar-menu">
-                                <MenuItem>
+                                <MenuItem onClick={()=>this.handleUserTypeSelection('Home')}>
                                     <span className="menu_list">Home</span>
                                 </MenuItem>
                                 
-                                <MenuItem>
-                                    <span className="menu_list">Farming Training</span>
+                                <MenuItem onClick={()=>this.handleUserTypeSelection('Farmer')}>
+                                    <span className="menu_list">Farmer</span>
+                                </MenuItem>
+                                <MenuItem onClick={()=>this.handleUserTypeSelection('Customer')}>
+                                    <span className="menu_list">Customer</span>
+                                </MenuItem>
+                                <MenuItem onClick={()=>this.handleUserTypeSelection('Admin')}>
+                                    <span className="menu_list">Admin</span>
                                 </MenuItem>
                             </div>
                         </div>

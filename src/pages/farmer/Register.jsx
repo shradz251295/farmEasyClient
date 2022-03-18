@@ -198,9 +198,9 @@ class Register extends Component {
         setTimeout(() => {
           this.props.history.push({
             state: {
-              showLogin:true
+              showLogin: true,
             },
-            pathname: "/farmer-login"
+            pathname: "/farmer-login",
           });
         }, 2000);
       });
@@ -280,6 +280,7 @@ class Register extends Component {
                         Password <span style={{ color: "red" }}>*</span>
                       </label>
                       <TextField
+                        type="password"
                         className="form-fields"
                         value={this.state.password}
                         onChange={this.handlePassword}
@@ -421,7 +422,7 @@ class Register extends Component {
           }}
           open={this.state.open}
           onClose={this.handleClose}
-          autoHideDuration={5000}
+          autoHideDuration={4000}
         >
           <SnackbarContent
             style={{

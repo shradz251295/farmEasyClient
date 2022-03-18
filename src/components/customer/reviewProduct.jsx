@@ -1,7 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import React, { Component } from "react";
 import ferti from "../../assets/New folder/methi.jpg";
-import { displayRazorPay } from "../../services/farmerService";
+import { displayRazorPay } from "../../services/customerService";
 import axios from "axios";
 
 class ReviewProduct extends Component {
@@ -32,7 +32,7 @@ class ReviewProduct extends Component {
     var options = {
       key: "rzp_test_y3IVf712MU2JMh",
       amount: amount, // 2000 paise = INR 20, amount in paisa
-      name: JSON.parse(localStorage.getItem("farmer_data")).name,
+      name: JSON.parse(localStorage.getItem("customer_data")).name,
       order_id: "",
 
       handler: function (response) {
@@ -41,13 +41,13 @@ class ReviewProduct extends Component {
           razorpay_signature: response.razorpay_signature,
           razorpay_order_id: response.razorpay_order_id,
           transactionid: response.razorpay_payment_id,
-          name: JSON.parse(localStorage.getItem("farmer_data")).name,
+          name: JSON.parse(localStorage.getItem("customer_data")).name,
           produceName:produceName,
           quantity: quantity,
           transactionamount: amount,
         };
         axios
-          .post("http://localhost:3001/payment", values)
+          .post("http://localhost:3001/custpayment", values)
           .then((res) => {
               console.log(res)
             alert("Transaction done successfully!");

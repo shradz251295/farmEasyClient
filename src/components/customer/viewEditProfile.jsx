@@ -9,7 +9,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import React, { Component } from "react";
-import { editProfile } from "../../services/farmerService";
+import { editProfile } from "../../services/customerService";
 
 const theme = createMuiTheme({
   overrides: {
@@ -32,7 +32,7 @@ const theme = createMuiTheme({
     }
   },
 });
-const userdata= localStorage.getItem('farmer_data')!==null?JSON.parse(localStorage.getItem('farmer_data')):null;
+const userdata= localStorage.getItem('customer_data')!==null?JSON.parse(localStorage.getItem('customer_data')):null;
 
 class ViewEditProfile extends Component {
   constructor(props) {
@@ -166,7 +166,7 @@ class ViewEditProfile extends Component {
       };
       editProfile(data).then((res) => {
         if(res.data.status===true && res.data!==null){
-        localStorage.setItem('farmer_data',JSON.stringify(res.data.data))
+        localStorage.setItem('customer_data',JSON.stringify(res.data.data))
         this.setState({
           open: true,
           variant: "success",
@@ -215,7 +215,7 @@ class ViewEditProfile extends Component {
             <div>
               <div className="fields-per-row">
                 <div style={{ width: "49%" }}>
-                  <label>Farmer Name</label>
+                  <label>Cusromer Name</label>
                   <TextField
                     className="form-fields"
                     value={this.state.name}

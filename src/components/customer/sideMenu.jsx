@@ -61,7 +61,7 @@ class SideMenu extends Component {
   };
 
   handleSignOut=()=>{
-    localStorage.removeItem('farmer_data');
+    localStorage.removeItem('customer_data');
     window.location.href="/"
   }
 
@@ -98,52 +98,17 @@ class SideMenu extends Component {
             >
               <Avatar style={{ width: "28px", height: "28px" }} />
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <span style={{ marginLeft: "15%",textTransform:"capitalize"}}>{JSON.parse(localStorage.getItem('farmer_data')).name}</span>
+                <span style={{ marginLeft: "15%",textTransform:"capitalize"}}>{JSON.parse(localStorage.getItem('customer_data')).name}</span>
               </div>
             </div>
           </MenuItem>
         </div>
+     
         <div style={{ textAlign: "left" }}>
           <span
             style={{ color: "#f1f1f1", fontSize: "15px", textAlign: "left" }}
           >
-            Product
-          </span>
-          <MenuItem
-            style={{
-              width: "100%",
-              height: "40px",
-              // background:
-              //   "linear-gradient(to right,#006400 0%, #009000 40%,green 60%)",
-              color: "#fff",
-              paddingLeft: "45px",
-              textTransform: "capitalize",
-            }}
-            onClick={() => this.handleSelection("produce")}
-          >
-            Sell Product
-          </MenuItem>
-          <MenuItem style={{
-            width: "100%",
-            height: "40px",
-            // background:
-            //   "linear-gradient(to right,#006400 0%, #009000 40%,green 60%)",
-            color: "#fff",
-            paddingLeft: "45px",
-            textTransform: "capitalize",
-            borderBottom: "1px solid #f1f1f1",
-            marginBottom: "4%",
-          }}
-            onClick={() => this.handleSelection("view_produce")}
-          >
-            View Product Details
-          </MenuItem>
-        </div>
-        <div style={{ textAlign: "left" }}>
-          <span
-            style={{ color: "#f1f1f1", fontSize: "15px", textAlign: "left" }}
-          >
-            Farmer's Kit
+            Farmer's Market
           </span>
 
         <MenuItem
@@ -158,7 +123,7 @@ class SideMenu extends Component {
           }}
           onClick={() => this.handleSelection("farmers_kit")}
         >
-          Buy Farmer's Kit
+          Buy Produce
         </MenuItem>
         <MenuItem style={{
             width: "100%",

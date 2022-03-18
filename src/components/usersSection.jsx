@@ -30,38 +30,33 @@ class UserSection extends Component {
             <div className="user-type">
                 <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Farmer')}>
                     <h6 className="user-title">Farmer</h6>
-                    <img src={farmer} />
+                    {/* <img src={farmer} /> */}
                     <p>Online market where you can sell fruits, vegetables, agri produce, etc..</p>
                     <span className="user-type-option-login-span">Login/Register as Farmer</span>
                     <Button className="login-btn">Click here</Button>
                 </Card>
                 <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Admin')}>
                     <h4 className="user-title">Admin</h4>
-                    <img src={admin} />
+                    {/* <img src={admin} /> */}
                     <p>Administer the categories for the products and all website information's.</p>
                     <span className="user-type-option-login-span">Login/Register as Admin</span>
                     <Button className="login-btn">Click here</Button>
                 </Card>
                   <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Customer')}>
                     <h4 className="user-title">Customer</h4>
-                    <img src={customer} />
+                    {/* <img src={customer} /> */}
                     <p>Are you willing to purchase products from farmer's?</p>
                     <span className="user-type-option-login-span">Login/Register as Customer</span>
                     <Button className="login-btn">Click here</Button>
                 </Card>
-                <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Supplier')}>
+                 {/* <Card className="user-type-option" onClick={() => this.handleUserTypeSelection('Supplier')}>
                     <h4 className="user-title">Crop Prediction</h4>
-                    <img src={supplier} />
                     <p>Prediction for crops,weather etc.</p>
-                    {/* <span className="user-type-option-login-span">Login/Register as Supplier</span> */}
                     <Button className="login-btn">Click here</Button>
-                </Card>
+                </Card>  */}
               
 
-                {/* <Login 
-                showLoginForm={this.state.showLoginForm}
-                userType={this.state.selectedUser}
-                /> */}
+               
             </div>
         )
     }

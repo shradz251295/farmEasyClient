@@ -9,12 +9,12 @@ import {
   styled,
   TablePagination,
   Button,
-  MuiThemeProvider,
   createMuiTheme,
+  MuiThemeProvider,
 } from "@material-ui/core";
 import { tableCellClasses } from "@material-ui/core";
 import React, { Component } from "react";
-import { deleteProduce, getProductList } from "../../services/farmerService";
+import { deleteState, getStateDetails } from "../../services/adminService";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -45,27 +45,32 @@ const theme = createMuiTheme({
     },
   },
 });
-class ViewProducts extends Component {
+class ViewStateDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productArr: [],
+      stateData: [],
       isLoading: true,
     };
   }
   componentDidMount() {
-    getProductList().then((res) => {
+    getStateDetails()
+    .then((res) => {
       if (res.status === true) {
-        this.setState({ productArr: res.data, isLoading: false });
-      }
+      let cities=[];
+      res.data.map((k) => {
+        if (k.city === "") {
+         cities = cities.concat(k);
+        }
+      });
+      this.setState({ stateData:cities,isLoading:false });
+    }
     });
   }
 
   deleteState=(row)=>{
-    let data={
-      id:row._id
-    }
-    deleteProduce(data)
+    console.log(row)
+    deleteState(row)
     .then((res)=>{
       this.componentDidMount();
     })
@@ -77,65 +82,53 @@ class ViewProducts extends Component {
       <div style={{ display: "flex", width: "100%", flexDirection: "column" }}>
         <div
           style={{
-            margin: "50px",
+            // margin: "50px",
             display: "flex",
             background: "#fff",
             height: "100%",
             color: "#2b2b2b",
-            padding: "20px 40px",
+            // padding: "20px 40px",
           }}
         >
-          {this.state.productArr.length === 0 &&
-            this.state.isLoading === false ? 
-              <h2
-                style={{
-                  textAlign: "center",
-                  textTransform: "capitalize",
-                  display: "flex",
-                  margin: "0 auto",
-                  alignItems: "center",
-                }}
-              >
-                No Records Found
-              </h2>
-             : this.state.isLoading ? 
-              <h2
-                style={{
-                  textAlign: "center",
-                  textTransform: "capitalize",
-                  display: "flex",
-                  margin: "0 auto",
-                  alignItems: "center",
-                }}
-              >
-                Loading.....
-              </h2>
-             :
+          {this.state.stateData.length===0 && this.state.isLoading === false ? 
+            <h2
+              style={{
+                textAlign: "center",
+                textTransform: "capitalize",
+                display: "flex",
+                margin: "0 auto",
+                alignItems: "center",
+              }}
+            >
+              No Records Found
+            </h2>
+           : this.state.isLoading ? 
+            <h2
+              style={{
+                textAlign: "center",
+                textTransform: "capitalize",
+                display: "flex",
+                margin: "0 auto",
+                alignItems: "center",
+              }}
+            >
+              Loading.....
+            </h2>
+           : 
           <div style={{ width: "100%" }}>
-            <h5>View Product Details</h5>
+            <h5>View State Details</h5>
             <div>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                   <TableHead style={{ background: "dimgray" }}>
                     <TableRow>
                       <TableCell style={{ color: "#fff" }}>
-                        Product Category
+                        State Name
                       </TableCell>
                       <TableCell style={{ color: "#fff" }} align="left">
-                        Product Name
+                        Description
                       </TableCell>
-                      <TableCell style={{ color: "#fff" }} align="left">
-                      Description
-                      </TableCell>
-                      <TableCell style={{ color: "#fff" }} align="left">
-                        Images
-                      </TableCell>
-                      <TableCell style={{ color: "#fff" }} align="left">
-                        Quantity
-                      </TableCell>
-                      <TableCell style={{ color: "#fff" }} align="left">
-                        Cost
-                      </TableCell>
+
                       <TableCell style={{ color: "#fff" }} align="left">
                         Status
                       </TableCell>
@@ -145,12 +138,12 @@ class ViewProducts extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {this.state.productArr.map((row) => (
+                    {this.state.stateData.map((row) => (
                       <StyledTableRow
-                      // key={row.category}
+                      // key={row.state}
                       // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
-                         <TableCell
+                        <TableCell
                           align="left"
                           style={{
                             textTransform: "capitalize",
@@ -158,7 +151,7 @@ class ViewProducts extends Component {
                             padding: "10px 15px",
                           }}
                         >
-                          {row.produceCategory}
+                          {row.state}
                         </TableCell>
                         <TableCell
                           align="left"
@@ -168,48 +161,7 @@ class ViewProducts extends Component {
                             padding: "10px 15px",
                           }}
                         >
-                          {row.produceName}
-                        </TableCell>
-                       
-                        <TableCell
-                          align="left"
-                          style={{
-                            textTransform: "capitalize",
-                            borderRight: "1px solid #afafaf",
-                            padding: "10px 15px",
-                          }}
-                        >
-                          {row.productDescription}
-                        </TableCell>
-                        <TableCell
-                          align="left"
-                          style={{
-                            textTransform: "capitalize",
-                            borderRight: "1px solid #afafaf",
-                            padding: "10px 15px",
-                          }}
-                        >
-                         <img src={row.image} width="25%" height="30%"/>
-                        </TableCell>
-                        <TableCell
-                          align="left"
-                          style={{
-                            textTransform: "capitalize",
-                            borderRight: "1px solid #afafaf",
-                            padding: "10px 15px",
-                          }}
-                        >
-                          {row.quantityType}
-                        </TableCell>
-                        <TableCell
-                          align="left"
-                          style={{
-                            textTransform: "capitalize",
-                            borderRight: "1px solid #afafaf",
-                            padding: "10px 15px",
-                          }}
-                        >
-                         ₹ {row.cost}
+                          { row.statedescription}
                         </TableCell>
                         <TableCell
                           align="left"
@@ -244,7 +196,7 @@ class ViewProducts extends Component {
                                 fontSize: "13px",
                                 lineHeight: "0",
                               }}
-                              onClick={()=>this.props.editProduce(row)}
+                              onClick={()=>this.props.editData(row)}
                             >
                               Edit
                             </Button>
@@ -272,8 +224,8 @@ class ViewProducts extends Component {
   }
         </div>
       </div>
-      </MuiThemeProvider>
+     </MuiThemeProvider>
     );
   }
 }
-export default ViewProducts;
+export default ViewStateDetails;

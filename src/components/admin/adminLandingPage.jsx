@@ -15,6 +15,8 @@ import AddCity from "./addCity";
 import AddProduceCategory from "./addProduceCategory";
 import AddProduceType from "./addProduceType";
 import AddFarmerKit from "./addFarmerKit";
+import AdminProfile from "./adminProfile";
+import ViewFarmersList from "./viewFarmersList";
 
 const theme = createMuiTheme({
   overrides: {
@@ -70,10 +72,10 @@ class AdminLandingPage extends Component {
           <div className="home-page-content">
             {/* <div className="home_page_background"></div> */}
             <Appbar />
-            <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex'}}>
+            <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex',overflowY:"hidden"}}>
               <AdminSideMenu toggleSideMenu={this.toggleSideMenu}/>
               {this.state.selectedMenu==="dashboard"?
-              <AdminDashboard />
+              <AdminProfile />
               :
               this.state.selectedMenu==="addState"?
               <AddState />
@@ -86,6 +88,9 @@ class AdminLandingPage extends Component {
               :
               this.state.selectedMenu==="addType"?
               <AddProduceType />
+              :
+              this.state.selectedMenu==="viewFarmerData"?
+              <ViewFarmersList />
               :
               this.state.selectedMenu==="addFarmerKit"?
               <AddFarmerKit/>

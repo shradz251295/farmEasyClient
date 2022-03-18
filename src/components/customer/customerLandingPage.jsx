@@ -8,8 +8,11 @@ import {
 import React, { Component } from "react";
 
 import Appbar from "../appbar";
-import FarmerProfile from "./profile";
+import Profile from "./profile";
 import SideMenu from "./sideMenu";
+import FarmersMarket from "./farmerMarket";
+import ViewPreviousOrders from "./viewPreviousOrders";
+
 
 const theme = createMuiTheme({
   overrides: {
@@ -33,10 +36,11 @@ const theme = createMuiTheme({
           position:'inherit',
         top: 65,
         width: 280,
-        background: "white",
+        background: "#006400",
       },
       paperAnchorDockedLeft: {
-        borderColor: "white",
+        border: "none !important",
+        padding:"28px 12px !important"
       },
     },
     MuiTypography: {
@@ -47,14 +51,22 @@ const theme = createMuiTheme({
     },
   },
 });
-class FarmerLandingPage extends Component {
+class CustomerLandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showUserTypePopup: false,
       selectedUser: "",
       showLoginForm: false,
+      selectedMenu:"",
+      productToEdit:""
     };
+  }
+  toggleSideMenu=(value)=>{
+    this.setState({selectedMenu:value})
+  }
+  editProduce=(value)=>{
+    this.setState({selectedMenu:"produce",productToEdit:value})
   }
   render() {
     return (
@@ -63,9 +75,17 @@ class FarmerLandingPage extends Component {
           <div className="home-page-content">
             {/* <div className="home_page_background"></div> */}
             <Appbar />
-            <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex'}}>
-              <SideMenu />
-              <FarmerProfile />
+            <div style={{marginTop:'65px',position:'relative',background:'#f1f1f1',height:'100%',display:'flex',overflow:"hidden"}}>
+              <SideMenu toggleSideMenu={this.toggleSideMenu}/>
+              {
+              this.state.selectedMenu==="farmers_kit"?
+              <FarmersMarket/>
+              :
+              this.state.selectedMenu==="view_order"?
+              <ViewPreviousOrders/>
+              :
+              <Profile />
+    }
             </div>
           </div>
         </div>
@@ -73,4 +93,4 @@ class FarmerLandingPage extends Component {
     );
   }
 }
-export default FarmerLandingPage;
+export default CustomerLandingPage;

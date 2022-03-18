@@ -88,7 +88,7 @@ class Login extends Component {
         console.log(res);
         if(res.status===true){
       this.props.history.push("/admin");
-      localStorage.setItem('username',res.data.username)
+      localStorage.setItem('admin_data',JSON.stringify(res.data))
         }
         else if(res.status===false){
           this.setState({
@@ -164,6 +164,7 @@ class Login extends Component {
                   </label>
                   <TextField
                     className="form-fields"
+                    type="password"
                     style={{
                       margin: "0",
                       width: "-webkit-fill-available",
@@ -190,7 +191,7 @@ class Login extends Component {
             }}
             open={this.state.open}
             onClose={this.handleClose}
-            autoHideDuration={50000}
+            autoHideDuration={4000}
           >
             <SnackbarContent
               style={{
